@@ -14,12 +14,17 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   TextEditingController emailController = TextEditingController();
   TextEditingController _passController = TextEditingController();
-
+  bool isLoading = false;
   void _signUp() {
     String email = emailController.text;
     String pass = _passController.text;
-
+    setState(() {
+      isLoading = true;
+    });
     Auth.createUser(email, pass, context).then((value) {
+      setState(() {
+        isLoading = false;
+      });
       if (value != null) {
         print(value.uid);
         Navigator.push(
@@ -55,7 +60,11 @@ class _SignUpState extends State<SignUp> {
                 onPressed: () async {
                   _signUp();
                 },
-                child: const Text("Sign UP"),
+                child: isLoading
+                    ? CircularProgressIndicator(
+                        color: Colors.white,
+                      )
+                    : Text("Sign UP"),
               ),
               SizedBox(
                 height: 20,

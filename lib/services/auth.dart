@@ -2,6 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Auth {
+  static String get userId {
+    return FirebaseAuth.instance.currentUser!.uid;
+  }
+
   static User hozirgiFoy() {
     return FirebaseAuth.instance.currentUser!;
   }
