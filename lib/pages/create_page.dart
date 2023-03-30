@@ -20,9 +20,7 @@ class _CreatePageState extends State<CreatePage> {
   void _createPost() async {
     String title = _titleC.text;
     String body = _bodyC.text;
-
-    Post post = Post(title, body, Auth.userId);
-
+    Post post = Post(title: title, body: body, userId: Auth.userId);
     RTDB.createPost(post);
   }
 
@@ -47,10 +45,12 @@ class _CreatePageState extends State<CreatePage> {
                 height: 20,
               ),
               ElevatedButton(
-                  onPressed: () {
-                    _createPost();
-                  },
-                  child: const Text("Post yaratish"))
+                onPressed: () {
+                  _createPost();
+                  Navigator.pop(context,"Qoshildi");
+                },
+                child: const Text("Post yaratish"),
+              ),
             ],
           ),
         ),
