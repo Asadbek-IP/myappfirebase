@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: isLoading
-            ? CircularProgressIndicator()
+            ? const CircularProgressIndicator()
             : ListView.builder(
                 itemCount: _posts.length,
                 itemBuilder: ((context, index) => Card(
@@ -74,23 +74,38 @@ class _HomePageState extends State<HomePage> {
                       margin: const EdgeInsets.all(10),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        child: Row(
                           children: [
-                            Text(
-                              _posts[index].title,
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            Expanded(
+                               flex: 2,
+                              child: Image(
+                                height: 100,
+                                fit: BoxFit.cover,
+                                image: NetworkImage(_posts[index].imageUrl)),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              _posts[index].body,
-                              style: const TextStyle(
-                                fontSize: 16,
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    _posts[index].title,
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    _posts[index].body,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  )
+                                ],
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
